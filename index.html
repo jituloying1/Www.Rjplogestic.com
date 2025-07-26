@@ -13,7 +13,6 @@
       color: #333;
     }
 
-    /* Background Video */
     .video-background {
       position: fixed;
       top: 0; left: 0;
@@ -33,7 +32,6 @@
       z-index: 2;
     }
 
-    /* Menu */
     nav {
       background: rgba(0,0,0,0.85);
       position: sticky;
@@ -191,14 +189,12 @@
 </head>
 <body>
 
-<!-- 🎬 Background Video -->
 <video autoplay muted loop class="video-background">
   <source src="myloges.mp4" type="video/mp4" />
 </video>
 
 <header>RJP Logistic Pvt. Ltd - Booking & Delivery Portal</header>
 
-<!-- 🧭 Navigation -->
 <nav>
   <div class="nav-container">
     <div class="menu-toggle" onclick="toggleMenu()">
@@ -217,7 +213,6 @@
   </div>
 </nav>
 
-<!-- 🧾 Sections -->
 <section id="home">
   <h2>Welcome to RJP Logistic Pvt. Ltd</h2>
   <p>Your trusted partner in logistics & delivery services.</p>
@@ -246,16 +241,6 @@
   <h2>Purchase Options</h2>
   <p>Contact us to customize your logistics or storage requirements.</p>
 </section>
-</section>
-   <div class="social_icon">
-               
-                  <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                  <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                  <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                  <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-               
-
-</section>
 
 <section id="booking">
   <div class="gallery" id="gallery"></div>
@@ -268,7 +253,6 @@
   </div>
 </section>
 
-<!-- 🧾 Popup -->
 <div class="overlay" id="overlay"></div>
 <div class="popup" id="popup">
   <h3>Book This Item</h3>
@@ -285,12 +269,12 @@
       <option value="Small">Small</option>
       <option value="Medium">Medium</option>
       <option value="Large">Large</option>
-       <option value="Small">liter</option>
-      <option value="Medium">kg</option>
-      <option value="Large">pecket</option>
-       <option value="Small">bottle</option>
-      <option value="Medium">feet</option>
-      <option value="Large">other</option>
+      <option value="liter">Liter</option>
+      <option value="kg">KG</option>
+      <option value="pecket">Pecket</option>
+      <option value="bottle">Bottle</option>
+      <option value="feet">Feet</option>
+      <option value="other">Other</option>
     </select>
     <label>Site Visit:</label>
     <select id="siteVisit">
@@ -305,7 +289,6 @@
   </form>
 </div>
 
-<!-- 🧠 Scripts -->
 <script>
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('active');
@@ -316,7 +299,11 @@
   const overlay = document.getElementById('overlay');
   const bookingForm = document.getElementById('bookingForm');
 
-  const images = Array.from({length: 100}, (_, i) => `https://picsum.photos/300/200?random=${i+1}`);
+  const images = [
+    "https://cdn.pixabay.com/photo/2017/06/06/22/44/rice-2386792_960_720.jpg", // Rice packet
+    ...Array.from({length: 99}, (_, i) => `https://picsum.photos/300/200?random=${i+2}`)
+  ];
+
   images.forEach(img => {
     const div = document.createElement('div');
     div.className = 'image-box';
