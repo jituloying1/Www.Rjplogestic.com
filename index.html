@@ -1,372 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RJP Logistic Pvt. Ltd - Booking Portal</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #f8f9fa, #e9ecef);
-      color: #333;
-    }
-
-    .video-background {
-      position: fixed;
-      top: 0; left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      object-fit: cover;
-    }
-
-    header {
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 24px;
-      position: relative;
-      z-index: 2;
-    }
-
-    nav {
-      background: rgba(0,0,0,0.85);
-      position: sticky;
-      top: 0;
-      z-index: 3;
-    }
-
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 14px;
-      border-radius: 5px;
-    }
-
-    .nav-links a:hover {
-      background: #343a40;
-    }
-
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .bar {
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      margin: 4px 0;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-      }
-      .nav-links.active {
-        display: flex;
-      }
-      .menu-toggle {
-        display: flex;
-      }
-    }
-
-    section {
-      padding: 40px 20px;
-      background: rgba(255,255,255,0.95);
-      margin: 20px;
-      border-radius: 10px;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 20px 0;
-    }
-
-    .image-box {
-      position: relative;
-      cursor: pointer;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .image-box img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .image-box:hover img {
-      transform: scale(1.05);
-    }
-
-    .image-box:hover::after {
-      content: "Click to Book";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-size: 16px;
-    }
-
-    .popup, .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 1000;
-    }
-
-    .overlay {
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    .popup {
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      max-width: 400px;
-      z-index: 1001;
-    }
-
-    .popup input, .popup select {
-      width: 100%;
-      padding: 8px;
-      margin: 10px 0;
-    }
-
-    .qr { text-align: center; }
-
-    .action-buttons {
-      text-align: center;
-      padding: 20px 0;
-    }
-
-    .action-buttons button, .action-buttons a {
-      margin: 10px;
-      padding: 10px 15px;
-      font-size: 16px;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-  </style>
+<title>Professional Job Application</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: Arial, sans-serif; background: #f2f2f2; margin:0; }
+.container { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.2);}
+h2 { text-align: center; color: #333; }
+label { display:block; margin-top:15px; font-weight: bold; color:#555; }
+input, select { width:100%; padding:8px; margin-top:5px; border-radius:5px; border:1px solid #ccc; }
+button { margin-top:20px; padding:10px 20px; border:none; background:#4CAF50; color:white; font-size:16px; border-radius:5px; cursor:pointer; }
+button:hover { background:#45a049; }
+small { color:red; }
+</style>
 </head>
 <body>
 
-<video autoplay muted loop class="video-background">
-  <source src="myloges.mp4" type="video/mp4" />
-</video>
-
-<header>RJP Logistic Pvt. Ltd - Booking & Delivery Portal</header>
-
-<nav>
-  <div class="nav-container">
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <div class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#sale">Sale</a>
-      <a href="#purchase">Purchase</a>
-      <a href="#booking">Booking Form</a>
-    </div>
-  </div>
-</nav>
-
-<section id="home">
-  <h2>Welcome to RJP Logistic Pvt. Ltd</h2>
-  <p>Your trusted partner in logistics & delivery services.</p>
-</section>
-
-<section id="about">
-  <h2>About Us</h2>
-  <p>We deliver everything from food to livestock and construction materials with speed, safety and reliability.</p>
-</section>
-
-<section id="projects">
-  <h2>Our Projects</h2>
-  <p>We’ve served 500+ clients in agriculture, retail, and industrial logistics across India.</p>
-</section>
-
-<section id="sale">
-  <h2>Items on Sale</h2>
-  <ul>
-    <li>🐷 Live Pig Transport</li>
-    <li>🍚 Bulk Rice and Grains</li>
-    <li>🍅 Vegetables and Dairy Products</li>
-  </ul>
-</section>
-
-<section id="purchase">
-  <h2>Purchase Options</h2>
-  <p>Contact us to customize your logistics or storage requirements.</p>
-</section>
-
-<section id="booking">
-  <div class="gallery" id="gallery"></div>
-  <div class="action-buttons">
-    <button onclick="viewStore()">🛒 View Store</button>
-    <a href="tel:+9344958807">📞 Call Now</a>
-    <a href="tel:+6001571316">📞 Call Now</a>
-    <a href="tel:+7896220943">📞 Call Now</a>
-    <a href="mailto:rjpmilsprivatelimited@gmail.com">📧 Email</a>
-  </div>
-</section>
-
-<div class="overlay" id="overlay"></div>
-<div class="popup" id="popup">
-  <h3>Book This Item</h3>
-  <form id="bookingForm">
-    <input type="hidden" id="bookingImage" />
-    <label>Name:</label>
+<div class="container">
+  <h2>Job Application Form</h2>
+  <form id="jobForm">
+    <label>Name</label>
     <input type="text" id="name" required>
-    <label>Phone:</label>
-    <input type="tel" id="phone" required>
-    <label>Email:</label>
+
+    <label>Father Name</label>
+    <input type="text" id="father" required>
+
+    <label>Mother Name</label>
+    <input type="text" id="mother" required>
+
+    <label>Email</label>
     <input type="email" id="email" required>
-    <label>Select Size:</label>
-    <select id="size">
-      <option value="Small">Small</option>
-      <option value="Medium">Medium</option>
-      <option value="Large">Large</option>
-      <option value="liter">Liter</option>
-      <option value="kg">KG</option>
-      <option value="pecket">Pecket</option>
-      <option value="bottle">Bottle</option>
-      <option value="feet">Feet</option>
-      <option value="other">Other</option>
+
+    <label>Phone</label>
+    <input type="tel" id="phone" required>
+
+    <label>Qualification</label>
+    <select id="qualification" required>
+      <option value="">Select</option>
+      <option>Class 8</option>
+      <option>Class 9</option>
+      <option>Class 10</option>
+      <option>Class 11</option>
+      <option>Class 12</option>
+      <option>BA</option>
+      <option>MA</option>
     </select>
-    <label>Site Visit:</label>
-    <select id="siteVisit">
-      <option value="Yes">Yes</option>
-      <option value="No">No</option>
-    </select>
-    <div class="qr">
-      <p>Scan & Pay ₹500 Advance</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?data=upi://pay?pa=jituloying1947-3@okaxis=RJP%20Logistic&am=500&cu=INR" width="200" />
-    </div>
-    <button type="submit">Submit Booking</button>
+
+    <label>Photo (max 50KB)</label>
+    <input type="file" id="photo" accept="image/*" required>
+
+    <label>Signature (max 20KB)</label>
+    <input type="file" id="signature" accept="image/*" required>
+
+    <label>Admit Card</label>
+    <input type="file" id="admitcard" accept=".pdf,.jpg,.png" required>
+
+    <label>Marksheet</label>
+    <input type="file" id="marksheet" accept=".pdf,.jpg,.png" required>
+
+    <label>Caste Certificate</label>
+    <input type="file" id="castecertificate" accept=".pdf,.jpg,.png" required>
+
+    <button type="submit">Submit Application</button>
+    <small id="status"></small>
   </form>
 </div>
 
 <script>
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('active');
-  }
+const form = document.getElementById('jobForm');
+const statusText = document.getElementById('status');
 
-  const gallery = document.getElementById('gallery');
-  const popup = document.getElementById('popup');
-  const overlay = document.getElementById('overlay');
-  const bookingForm = document.getElementById('bookingForm');
-
-  const images = [
-    "https://cdn.pixabay.com/photo/2017/06/06/22/44/rice-2386792_960_720.jpg", // Rice packet
-    ...Array.from({length: 99}, (_, i) => `https://picsum.photos/300/200?random=${i+2}`)
-  ];
-
-  images.forEach(img => {
-    const div = document.createElement('div');
-    div.className = 'image-box';
-    div.innerHTML = `<img src="${img}" alt="Item" />`;
-    div.onclick = () => openPopup(img);
-    gallery.appendChild(div);
+function fileToBase64(file, maxSizeKB) {
+  return new Promise((resolve, reject) => {
+    if(file.size/1024 > maxSizeKB) {
+      reject(file.name + " exceeds " + maxSizeKB + "KB");
+    }
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = err => reject(err);
+    reader.readAsDataURL(file);
   });
+}
 
-  function openPopup(img) {
-    document.getElementById('bookingImage').value = img;
-    popup.style.display = 'block';
-    overlay.style.display = 'block';
-  }
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  statusText.textContent = "";
 
-  overlay.onclick = () => {
-    popup.style.display = 'none';
-    overlay.style.display = 'none';
-  };
-
-  bookingForm.onsubmit = async function(e) {
-    e.preventDefault();
+  try {
     const data = {
       name: document.getElementById('name').value,
-      phone: document.getElementById('phone').value,
+      father: document.getElementById('father').value,
+      mother: document.getElementById('mother').value,
       email: document.getElementById('email').value,
-      size: document.getElementById('size').value,
-      siteVisit: document.getElementById('siteVisit').value,
-      image: document.getElementById('bookingImage').value,
-      paymentStatus: 'Paid ₹500'
+      phone: document.getElementById('phone').value,
+      qualification: document.getElementById('qualification').value,
+      photo: await fileToBase64(document.getElementById('photo').files[0], 50),
+      signature: await fileToBase64(document.getElementById('signature').files[0], 20),
+      admitcard: await fileToBase64(document.getElementById('admitcard').files[0], 2000),
+      marksheet: await fileToBase64(document.getElementById('marksheet').files[0], 2000),
+      castecertificate: await fileToBase64(document.getElementById('castecertificate').files[0], 2000)
     };
 
-    const res = await fetch('YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL', {
-      method: 'POST',
+    const response = await fetch("YOUR_SCRIPT_URL_HERE", {
+      method: "POST",
       body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { "Content-Type": "application/json" }
     });
 
-    if (res.ok) {
-      alert("Booking successful!");
-      popup.style.display = 'none';
-      overlay.style.display = 'none';
-      bookingForm.reset();
+    const result = await response.json();
+    if(result.status === 'success') {
+      alert("Application Submitted Successfully");
+      form.reset();
     } else {
-      alert("Booking failed.");
+      statusText.textContent = "Error: " + result.message;
     }
-  };
 
-  const storeItems = [
-    "🐷 Pig (Live Animal Transport)", "🍚 Rice Bags", "🌾 Wheat & Grains", "🥔 Potato Sacks",
-    "🍅 Tomato Crates", "🥕 Carrots", "🥬 Green Vegetables", "🍎 Apple Cartons",
-    "🍌 Banana Bunches", "🥭 Mango Boxes", "🧅 Onion Bags", "🧄 Garlic Packs",
-    "🍗 Chicken", "🥩 Mutton & Pork", "🐟 Fish Containers", "🥫 Ready-to-eat Food",
-    "🍶 Oil Cans", "🧴 Cooking Ingredients", "🍞 Bread Crates", "🧁 Bakery Items",
-    "🧊 Ice Cream Boxes", "🥤 Soft Drinks", "🍼 Milk Products", "🍯 Honey & Jams",
-    "🍫 Chocolates & Snacks", "📦 Grocery Kits", "🍽️ Mess Catering", "🪵 Firewood",
-    "🧻 Hygiene Products", "🧼 Soap & Detergent", "🧽 Kitchen Items", "🚜 Agriculture Tools",
-    "💧 Bottled Water", "📚 Books, Stationery", "👕 Clothes", "🧥 Woolen & Blankets",
-    "🪑 Furniture", "🏠 Building Materials", "🪔 Festival Items", "📦 Custom Orders"
-  ];
-
-  function viewStore() {
-    alert("Current Store Inventory:\n\n" + storeItems.map((item, i) => `${i+1}. ${item}`).join('\n'));
+  } catch(err) {
+    statusText.textContent = "Error: " + err;
   }
+});
 </script>
 
 </body>
